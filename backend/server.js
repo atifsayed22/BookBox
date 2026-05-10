@@ -17,7 +17,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/bookings', bookingRoutes);
 
-app.get('/', (req, res) => res.json({ message: 'booMyService API running' }));
+app.get('/', (req, res) => res.json({ message: 'BookBox API running' }));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

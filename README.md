@@ -1,4 +1,4 @@
-# booMyService
+# BookBox
 
 A full-stack service booking platform built with the MERN stack. Vendors can list their services, customers can browse and book them, and vendors manage the entire booking lifecycle — from accepting requests to marking jobs as completed.
 
@@ -30,7 +30,7 @@ Think of it as a MakeMyTrip-style platform, but for local services like cleaning
 ## Project Structure
 
 ```
-booMyService/
+BookBox/
 ├── backend/
 │   ├── config/
 │   │   └── db.js                  # MongoDB connection
@@ -213,7 +213,7 @@ status      String    "pending" | "accepted" | "rejected" | "completed"
 Edit `backend/.env`:
 
 ```env
-MONGO_URI=mongodb://localhost:27017/booMyService
+MONGO_URI=mongodb://localhost:27017/BookBox
 JWT_SECRET=your_secret_key_here
 JWT_EXPIRES_IN=7d
 EMAIL_USER=your_gmail@gmail.com
