@@ -13,7 +13,13 @@ export default function VendorDashboard() {
 
   const fetchServices = () => {
     setLoading(true);
-    api.get('/services/my-services').then((res) => setServices(res.data)).finally(() => setLoading(false));
+    api.get('/services/my-services').then((res) => {
+      const data = Array.isArray(res.data) ? res.data : [];
+      setServices(data);
+    }).catch((err) => {
+      console.error('Failed to fetch services:', err);
+      setServices([]);
+    }).finally(() => setLoading(false));
   };
 
   useEffect(fetchServices, []);

@@ -13,8 +13,13 @@ export default function BrowseServices() {
 
   useEffect(() => {
     api.get('/services').then((res) => {
-      setServices(res.data);
-      setFiltered(res.data);
+      const data = Array.isArray(res.data) ? res.data : [];
+      setServices(data);
+      setFiltered(data);
+    }).catch((err) => {
+      console.error('Failed to fetch services:', err);
+      setServices([]);
+      setFiltered([]);
     }).finally(() => setLoading(false));
   }, []);
 

@@ -9,7 +9,13 @@ export default function ManageBookings() {
 
   const fetch = () => {
     setLoading(true);
-    api.get('/bookings/received').then((res) => setBookings(res.data)).finally(() => setLoading(false));
+    api.get('/bookings/received').then((res) => {
+      const data = Array.isArray(res.data) ? res.data : [];
+      setBookings(data);
+    }).catch((err) => {
+      console.error('Failed to fetch bookings:', err);
+      setBookings([]);
+    }).finally(() => setLoading(false));
   };
 
   useEffect(fetch, []);

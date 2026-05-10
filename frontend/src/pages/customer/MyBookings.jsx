@@ -7,7 +7,13 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/bookings/my-bookings').then((res) => setBookings(res.data)).finally(() => setLoading(false));
+    api.get('/bookings/my-bookings').then((res) => {
+      const data = Array.isArray(res.data) ? res.data : [];
+      setBookings(data);
+    }).catch((err) => {
+      console.error('Failed to fetch bookings:', err);
+      setBookings([]);
+    }).finally(() => setLoading(false));
   }, []);
 
   if (loading) return (
