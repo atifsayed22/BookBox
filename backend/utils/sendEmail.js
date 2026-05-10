@@ -1,14 +1,24 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Custom DNS lookup that forces IPv4
+const customLookup = (hostname, options, callback) => {
+  dns.resolve4(hostname, (err, addresses) => {
+    if (err) return callback(err);
+    callback(null, addresses[0], 4);
+  });
+};
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true, // Use SSL
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Must be a 16-character App Password
+    pass: process.env.EMAIL_PASS,
   },
-  connectionTimeout: 10000, // 10 seconds
+  lookup: customLookup,
+  connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000,
 });
